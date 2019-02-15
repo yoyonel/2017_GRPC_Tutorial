@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+grpcio = "*"
+grpcio-tools = "*"
+ipython = "*"
+memory-profiler = "*"
+sqlalchemy = "*"
+geoalchemy2 = "*"
+psycopg2 = "*"
+python-consul = "*"
+statsd = "*"
+dnspython = "*"
+
+[requires]
+python_version = "3.7"
