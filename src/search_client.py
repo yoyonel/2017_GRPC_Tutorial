@@ -4,7 +4,8 @@ import sys
 import logging
 from dns import resolver
 
-import search_pb2
+import proto.search_pb2 as search_pb2
+import proto.search_pb2_grpc as search_pb2_grpc
 
 
 def init_logger(verbose):
@@ -52,7 +53,7 @@ def process(args):
     ######################################################################
     log.info("creating grpc client based on consul data: ip=%s port=%d" % (ip, port))
     channel = grpc.insecure_channel('%s:%d' % (ip, port))
-    stub = search_pb2.SearchStub(channel)
+    stub = search_pb2_grpc.SearchStub(channel)
     ######################################################################
 
     log.debug("args.monitor: {}".format(args.monitor))

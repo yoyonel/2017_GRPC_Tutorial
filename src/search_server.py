@@ -4,8 +4,11 @@ import consul
 import logging
 import statsd
 import random
+from concurrent import futures
+import grpc
 
-import search_pb2
+import proto.search_pb2 as search_pb2
+import proto.search_pb2_grpc as search_pb2_grpc
 from models import session, Thing, func
 
 log = logging.getLogger()
@@ -13,7 +16,8 @@ log.setLevel(logging.DEBUG)
 
 ch = logging.StreamHandler(sys.stdout)
 ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 log.addHandler(ch)
 
@@ -24,14 +28,15 @@ port = random.randint(50000, 59000)
 stat = statsd.StatsClient('localhost', 8125)
 
 
-class SearchServicer(search_pb2.SearchServicer):
+class SearchServicer(search_pb2_grpc.SearchServicer):
     @stat.timer("search")
     def search(self, request, context):
         stat.incr("search_count")
         log.info("search request: " + str(request))
         query = session.query(Thing).filter(
             func.ST_Contains(Thing.geom, 'POINT({} {})'.format(request.lat, request.lng)))
-        responses = [search_pb2.SearchResponse(response=rec.name) for rec in query]
+        responses = [search_pb2.SearchResponse(
+            response=rec.name) for rec in query]
         log.info("search responses: " + str(responses))
         return search_pb2.SearchResponses(responses=responses)
 
@@ -64,7 +69,10 @@ def unregister():
 
 
 def serve():
-    server = search_pb2.beta_create_Search_server(SearchServicer())
+    # server = search_pb2_grpc.beta_create_Search_server(SearchServicer())
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    search_pb2_grpc.add_SearchServicer_to_server(
+        SearchServicer(), server)
     server.add_insecure_port('[::]:' + str(port))
     server.start()
     log.info("server started")

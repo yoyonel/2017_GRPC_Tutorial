@@ -16,6 +16,7 @@ psycopg2 = "*"
 python-consul = "*"
 statsd = "*"
 dnspython = "*"
+futures = "*"
 
 [requires]
 python_version = "3.7"
