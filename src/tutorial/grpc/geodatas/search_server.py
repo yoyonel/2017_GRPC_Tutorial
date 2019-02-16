@@ -21,7 +21,6 @@ formatter = logging.Formatter(
 ch.setFormatter(formatter)
 log.addHandler(ch)
 
-
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 port = random.randint(50000, 59000)
@@ -82,7 +81,11 @@ def serve():
         server.stop(0)
 
 
-if __name__ == '__main__':
+def main():
     register()
     serve()
     unregister()
+
+
+if __name__ == '__main__':
+    main()

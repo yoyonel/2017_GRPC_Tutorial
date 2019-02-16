@@ -98,6 +98,12 @@ setup(
         'sdist': SDistCommand,
         'build_proto_modules': BuildPackageProtos
     },
+    entry_points={
+        'console_scripts': [
+            'search_server = tutorial.grpc.geodatas.search_server:main',
+            'search_client = tutorial.grpc.geodatas.search_client:main',
+        ]
+    },
     # https://github.com/pypa/sample-namespace-packages/issues/6
     zip_safe=False
 )

@@ -4,8 +4,7 @@ import sys
 import logging
 from dns import resolver
 
-import proto.search_pb2 as search_pb2
-import proto.search_pb2_grpc as search_pb2_grpc
+from tutorial.grpc.geodatas.proto import search_pb2_grpc, search_pb2
 
 
 def init_logger(verbose):
