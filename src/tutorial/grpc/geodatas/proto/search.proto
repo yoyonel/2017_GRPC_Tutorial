@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+message SearchRequest {
+  string query = 1;
+  float lat = 4;
+  float lng = 5;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+}
+
+message SearchResponses {
+    repeated SearchResponse responses = 1;
+}
+
+message SearchResponse {
+    string response = 1;
+}
+
+message MonitorResponse {
+    int32 n_things = 1;
+}
+
+service Search {
+    rpc monitor(google.protobuf.Empty) returns (MonitorResponse) {}
+    rpc search(SearchRequest) returns (SearchResponses) {}
+}
