@@ -4,7 +4,7 @@ services:
     # docker run --name postgis -e POSTGRES_PASSWORD=password -e POSTGRES_USER=user -p 5432:5432 -d mdillon/postgis
     db:
       # https://hub.docker.com/r/mdillon/postgis/
-      image: mdillon/postgis
+      image: mdillon/postgis:9.6-alpine
       hostname: postgis
       volumes:
         # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -22,17 +22,18 @@ services:
 
     #
     # docker run -d --name graphite --restart=always -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 -p 8125:8125/udp -p 8126:8126 hopsoft/graphite-statsd
-    # graphite:
-    #   image: hopsoft/graphite-statsd
-    #   hostname: graphite
-    #   # ports:
-    #   #   # -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 -p 8125:8125/udp -p 8126:8126
-    #   #   - "0.0.0.0:80:80"
-    #   #   - "0.0.0.0:2003-2004:2003-2004"
-    #   #   - "0.0.0.0:2023-2024:2023-2024"
-    #   #   - "0.0.0.0:8125:8125/udp"
-    #   #   - "0.0.0.0:8126:8126"
-    #   network_mode: "host"
+    graphite:
+      image: hopsoft/graphite-statsd
+      hostname: graphite
+      ports:
+       #   # -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 -p 8125:8125/udp -p 8126:8126
+        - "0.0.0.0:80:80"
+        - "0.0.0.0:81:81"
+        - "0.0.0.0:2005-2006:2003-2004"
+        - "0.0.0.0:2023-2024:2023-2024"
+        - "0.0.0.0:8125:8125/udp"
+        - "0.0.0.0:8126:8126"
+#       network_mode: "host"
 
     # CONSUL
     # docker run --net=host consul agent -server -ui -bootstrap -bind=127.0.0.1

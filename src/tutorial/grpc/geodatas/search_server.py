@@ -8,20 +8,11 @@ import grpc
 from sqlalchemy import func
 import signal
 import pkg_resources
-import time
 
 from tutorial.grpc.geodatas.models import session, Thing
 from tutorial.grpc.geodatas.proto import search_pb2, search_pb2_grpc
 
-log = logging.getLogger()
-log.setLevel(logging.DEBUG)
-
-ch = logging.StreamHandler(sys.stdout)
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter(
-    '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-log.addHandler(ch)
+logger = logging.getLogger(__name__)
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
@@ -40,12 +31,12 @@ class SearchServicer(search_pb2_grpc.SearchServicer):
     @stat.timer("search")
     def search(self, request, context):
         stat.incr("search_count")
-        log.info("search request: " + str(request))
+        logger.info("search request: " + str(request))
         query = session.query(Thing).filter(
             func.ST_Contains(Thing.geom, 'POINT({} {})'.format(request.lat, request.lng)))
         responses = [search_pb2.SearchResponse(
             response=rec.name) for rec in query]
-        log.info("search responses: " + str(responses))
+        logger.info("search responses: " + str(responses))
         return search_pb2.SearchResponses(responses=responses)
 
     @stat.timer("monitor")
@@ -56,7 +47,7 @@ class SearchServicer(search_pb2_grpc.SearchServicer):
 
 
 def register():
-    log.info("register started")
+    logger.info("register started")
     c = consul.Consul()
     check = consul.Check.tcp("127.0.0.1", port, "30s")
     c.agent.service.register(
@@ -66,47 +57,19 @@ def register():
         port=port,
         check=check
     )
-    log.info("services: " + str(c.agent.services()))
+    logger.info("services: " + str(c.agent.services()))
 
 
 def unregister():
-    log.info("unregister started")
+    logger.info("unregister started")
     c = consul.Consul()
     c.agent.service.deregister("search-service-%d" % port)
-    log.info("services: " + str(c.agent.services()))
-
-
-def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    search_pb2_grpc.add_SearchServicer_to_server(
-        SearchServicer(), server)
-    server.add_insecure_port('[::]:' + str(port))
-    server.start()
-    log.info("server started")
-    try:
-        while True:
-            time.sleep(_ONE_DAY_IN_SECONDS)
-    except KeyboardInterrupt:
-        server.stop(0)
+    logger.info("services: " + str(c.agent.services()))
 
 
 # Not working ! :(
-def serve_2(block=True):
-    """
-    Start a new instance of the core service.
-
-    If the server can't be started, a ConnectionError exception is raised
-
-    :param block: If True, block until interrupted. If False, start the server and return directly
-    :type block: bool
-
-    :return: If ``block`` is True, return nothing. If ``block`` is False, return the server instance
-    :rtype: None | grpc.server
-    """
-    global port
-    # FIXME: We need a configuration file at some points
-
-    log.info("Search-Server, version: {}".format(
+def serve(block=True):
+    logger.info("Search service, version={}".format(
         pkg_resources.get_distribution('tutorial-grpc-geodatas').version
     ))
 
@@ -115,29 +78,27 @@ def serve_2(block=True):
         for sig in SIGNALS:
             signal.signal(sig, _signal_handler)
 
-    # We set this number high to allow basically anyone to connect with us
-    max_number_of_clients = 500
-    server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=max_number_of_clients),
-        maximum_concurrent_rpcs=max_number_of_clients
-    )
+    max_number_of_clients = 10
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10), maximum_concurrent_rpcs=max_number_of_clients)
 
-    grpc_host_and_port = f"[::]:{port}"
-    port = server.add_insecure_port(grpc_host_and_port)
-    if port == 0:
-        log.error("Failed to start gRPC server on {}".format(grpc_host_and_port))
+    search_pb2_grpc.add_SearchServicer_to_server(SearchServicer(), server)
+
+    grpc_host_and_port = '[::]:' + str(port)
+    insecure_port = server.add_insecure_port(grpc_host_and_port)
+    if insecure_port == 0:
+        logger.error(f"Failed to start gRPC server on {insecure_port}")
         raise ConnectionError
 
-    log.info(f"Starting server on port {port}...")
+    logger.info(f"Starting server on port {insecure_port}...")
     server.start()
-    log.info("Ready and waiting for connections.")
+    logger.info("Ready and waiting for connections.")
 
     if not block:
-        return server
+        return server, insecure_port
 
-    # Wait for a signal before exiting
+        # Wait for a signal before exiting
     sig = signal.sigwait(SIGNALS)
-    log.info('Signal {} received, shutting down...'.format(sig))
+    logger.info('Signal {} received, shutting down...'.format(sig))
 
     server.stop(5).wait()
 
@@ -149,4 +110,7 @@ def main():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+    logger.setLevel(logging.DEBUG)
+
     main()

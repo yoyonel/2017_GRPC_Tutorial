@@ -2,6 +2,7 @@ import argparse
 import grpc
 import sys
 import logging
+import dns
 from dns import resolver
 
 from tutorial.grpc.geodatas.proto import search_pb2_grpc, search_pb2
@@ -36,29 +37,34 @@ def process(args):
     Returns:
 
     """
-    log = init_logger(args.verbose)
+    logger = init_logger(args.verbose)
 
     ######################################################################
     consul_resolver = resolver.Resolver()
     consul_resolver.port = args.consul_resolver_port
     consul_resolver.nameservers = args.consul_resolver_nameservers
 
-    dnsanswer = consul_resolver.query("search-service.service.consul", 'A')
+    consul_service_name = "search-service.service.consul"
+    try:
+        dnsanswer = consul_resolver.query(consul_service_name, 'A')
+    except dns.resolver.NoNameservers:
+        raise RuntimeError(f"Can't find consul service={consul_service_name} => "
+                           f"`Search-service` server not started/synced/checked !")
     ip = str(dnsanswer[0])
     dnsanswer_srv = consul_resolver.query("search-service.service.consul", 'SRV')
     port = int(str(dnsanswer_srv[0]).split()[2])
     ######################################################################
 
     ######################################################################
-    log.info("creating grpc client based on consul data: ip=%s port=%d" % (ip, port))
+    logger.info("creating grpc client based on consul data: ip=%s port=%d" % (ip, port))
     channel = grpc.insecure_channel('%s:%d' % (ip, port))
     stub = search_pb2_grpc.SearchStub(channel)
     ######################################################################
 
-    log.debug("args.monitor: {}".format(args.monitor))
+    logger.debug("args.monitor: {}".format(args.monitor))
     if args.monitor:
         monitresp = stub.monitor(search_pb2.google_dot_protobuf_dot_empty__pb2.Empty())
-        log.debug("monitor response: {}".format(monitresp))
+        logger.debug("monitor response: {}".format(monitresp))
 
     if args.request_position_latlng:
         req = search_pb2.SearchRequest(
@@ -66,9 +72,9 @@ def process(args):
             lat=args.request_position_latlng[0],
             lng=args.request_position_latlng[1],
             result_per_page=10)
-        log.debug("sending request: {}".format(req))
+        logger.debug("sending request: {}".format(req))
         resp = stub.search(req)
-        log.debug("received response: {}".format(resp))
+        logger.debug("received response: {}".format(resp))
 
 
 def build_parser(parser=None, **argparse_options):
