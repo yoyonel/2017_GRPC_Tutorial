@@ -1,3 +1,7 @@
+# coding=utf-8
+"""
+TODO: refactorer pour séparer la définition des modèles et la gestion de l'ORM (sqlalchemy)
+"""
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String

@@ -1,31 +1,51 @@
+"""
+
+"""
 import argparse
 import grpc
-import sys
 import logging
 import dns
-from dns import resolver
 
 from tutorial.grpc.geodatas.proto import search_pb2_grpc, search_pb2
 
+logger = logging.getLogger(__name__)
 
-def init_logger(verbose):
+
+def find_search_service_with_consul(consul_resolver_port, consul_resolver_nameservers):
     """
 
-    Args:
-        verbose (bool):
-
-    Returns:
-
+    :param consul_resolver_port:
+    :param consul_resolver_nameservers:
+    :return:
     """
-    log = logging.getLogger()
-    log.setLevel(logging.DEBUG)
+    consul_resolver = dns.resolver.Resolver()
+    consul_resolver.port = consul_resolver_port
+    consul_resolver.nameservers = consul_resolver_nameservers
 
-    ch = logging.StreamHandler(sys.stdout)
-    ch.setLevel(logging.DEBUG if verbose else logging.INFO)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    ch.setFormatter(formatter)
-    log.addHandler(ch)
-    return log
+    consul_service_name = "search-service.service.consul"
+    try:
+        dnsanswer = consul_resolver.query(consul_service_name, 'A')
+    except dns.resolver.NoNameservers:
+        raise RuntimeError(f"Can't find consul service={consul_service_name} => "
+                           f"`Search-service` server not started/synced/checked !")
+    ip = str(dnsanswer[0])
+    dnsanswer_srv = consul_resolver.query("search-service.service.consul", 'SRV')
+    port = int(str(dnsanswer_srv[0]).split()[2])
+
+    return ip, port
+
+
+def get_search_rpc_stub(ip, port):
+    """
+
+    :param ip:
+    :param port:
+    :return:
+    """
+    logger.info(f"creating grpc client based on consul data: ip={ip} port={port}")
+    channel = grpc.insecure_channel(f'{ip}:{port}')
+    stub = search_pb2_grpc.SearchStub(channel)
+    return stub
 
 
 def process(args):
@@ -37,29 +57,9 @@ def process(args):
     Returns:
 
     """
-    logger = init_logger(args.verbose)
+    ip, port = find_search_service_with_consul(args.consul_resolver_port, args.consul_resolver_nameservers)
 
-    ######################################################################
-    consul_resolver = resolver.Resolver()
-    consul_resolver.port = args.consul_resolver_port
-    consul_resolver.nameservers = args.consul_resolver_nameservers
-
-    consul_service_name = "search-service.service.consul"
-    try:
-        dnsanswer = consul_resolver.query(consul_service_name, 'A')
-    except dns.resolver.NoNameservers:
-        raise RuntimeError(f"Can't find consul service={consul_service_name} => "
-                           f"`Search-service` server not started/synced/checked !")
-    ip = str(dnsanswer[0])
-    dnsanswer_srv = consul_resolver.query("search-service.service.consul", 'SRV')
-    port = int(str(dnsanswer_srv[0]).split()[2])
-    ######################################################################
-
-    ######################################################################
-    logger.info("creating grpc client based on consul data: ip=%s port=%d" % (ip, port))
-    channel = grpc.insecure_channel('%s:%d' % (ip, port))
-    stub = search_pb2_grpc.SearchStub(channel)
-    ######################################################################
+    stub = get_search_rpc_stub(ip, port)
 
     logger.debug("args.monitor: {}".format(args.monitor))
     if args.monitor:
@@ -135,4 +135,7 @@ def main():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+    logger.setLevel(logging.DEBUG)
+
     main()

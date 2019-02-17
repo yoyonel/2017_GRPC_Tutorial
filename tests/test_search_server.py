@@ -1,9 +1,7 @@
 """
-
 """
+from tutorial.grpc.geodatas.models.models import Thing, session
 from tutorial.grpc.geodatas.proto import search_pb2
-from tutorial.grpc.geodatas.models import Thing
-from tutorial.grpc.geodatas.models import session
 
 
 def test_search_server(core_rpc_stub):
