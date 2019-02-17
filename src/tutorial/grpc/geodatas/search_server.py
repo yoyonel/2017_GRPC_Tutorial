@@ -1,4 +1,3 @@
-import time
 import sys
 import consul
 import logging
@@ -7,6 +6,9 @@ import random
 from concurrent import futures
 import grpc
 from sqlalchemy import func
+import signal
+import pkg_resources
+import time
 
 from tutorial.grpc.geodatas.models import session, Thing
 from tutorial.grpc.geodatas.proto import search_pb2, search_pb2_grpc
@@ -25,6 +27,13 @@ _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 port = random.randint(50000, 59000)
 stat = statsd.StatsClient('localhost', 8125)
+
+SIGNALS = [signal.SIGINT, signal.SIGTERM]
+
+
+def _signal_handler(sig, stack):
+    """ Empty signal handler used to override python default one """
+    pass
 
 
 class SearchServicer(search_pb2_grpc.SearchServicer):
@@ -79,6 +88,58 @@ def serve():
             time.sleep(_ONE_DAY_IN_SECONDS)
     except KeyboardInterrupt:
         server.stop(0)
+
+
+# Not working ! :(
+def serve_2(block=True):
+    """
+    Start a new instance of the core service.
+
+    If the server can't be started, a ConnectionError exception is raised
+
+    :param block: If True, block until interrupted. If False, start the server and return directly
+    :type block: bool
+
+    :return: If ``block`` is True, return nothing. If ``block`` is False, return the server instance
+    :rtype: None | grpc.server
+    """
+    global port
+    # FIXME: We need a configuration file at some points
+
+    log.info("Search-Server, version: {}".format(
+        pkg_resources.get_distribution('tutorial-grpc-geodatas').version
+    ))
+
+    # Register signal handler, only if blocking
+    if block:
+        for sig in SIGNALS:
+            signal.signal(sig, _signal_handler)
+
+    # We set this number high to allow basically anyone to connect with us
+    max_number_of_clients = 500
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=max_number_of_clients),
+        maximum_concurrent_rpcs=max_number_of_clients
+    )
+
+    grpc_host_and_port = f"[::]:{port}"
+    port = server.add_insecure_port(grpc_host_and_port)
+    if port == 0:
+        log.error("Failed to start gRPC server on {}".format(grpc_host_and_port))
+        raise ConnectionError
+
+    log.info(f"Starting server on port {port}...")
+    server.start()
+    log.info("Ready and waiting for connections.")
+
+    if not block:
+        return server
+
+    # Wait for a signal before exiting
+    sig = signal.sigwait(SIGNALS)
+    log.info('Signal {} received, shutting down...'.format(sig))
+
+    server.stop(5).wait()
 
 
 def main():

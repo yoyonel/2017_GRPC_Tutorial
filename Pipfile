@@ -17,6 +17,7 @@ python-consul = "*"
 statsd = "*"
 dnspython = "*"
 futures = "*"
+pytest-docker-compose = "*"
 
 [requires]
 python_version = "3.7"
