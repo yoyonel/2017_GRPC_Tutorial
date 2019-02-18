@@ -5,6 +5,7 @@ import argparse
 import grpc
 import logging
 import dns
+from dns import resolver
 
 from tutorial.grpc.geodatas.proto import search_pb2_grpc, search_pb2
 
@@ -18,13 +19,16 @@ def find_search_service_with_consul(consul_resolver_port, consul_resolver_namese
     :param consul_resolver_nameservers:
     :return:
     """
-    consul_resolver = dns.resolver.Resolver()
+    consul_resolver = resolver.Resolver()
     consul_resolver.port = consul_resolver_port
     consul_resolver.nameservers = consul_resolver_nameservers
 
     consul_service_name = "search-service.service.consul"
     try:
-        dnsanswer = consul_resolver.query(consul_service_name, 'A')
+        dnsanswer = consul_resolver.query(consul_service_name, 'A', lifetime=5)
+    except dns.exception.Timeout:
+        raise RuntimeError(
+            f"[dns.exception.Timeout] Can't reach consul resolver at port={consul_resolver_port} !")
     except dns.resolver.NoNameservers:
         raise RuntimeError(f"Can't find consul service={consul_service_name} => "
                            f"`Search-service` server not started/synced/checked !")

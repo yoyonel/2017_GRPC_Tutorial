@@ -11,9 +11,9 @@ services:
         - ./postgis:/var/lib/postgresql
       # uncomment this to expose port 5432 to the host
       # WARNING: THIS IS UNSAFE USE ONLY FOR DEV
-      # ports:
-      #   - "0.0.0.0:5432:5432"
-      network_mode: "host"
+      ports:
+        - "0.0.0.0:${TUTORIAL_GRPC_DB_PORT}:5432"
+      # network_mode: "host"
       environment:
         - POSTGRES_USER:'user'
         - POSTGRES_PASSWORD:'password'
@@ -26,9 +26,9 @@ services:
       image: hopsoft/graphite-statsd
       hostname: graphite
       ports:
-       #   # -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 -p 8125:8125/udp -p 8126:8126
+        # -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 -p 8125:8125/udp -p 8126:8126
         - "0.0.0.0:80:80"
-        - "0.0.0.0:81:81"
+        - "0.0.0.0:${TUTORIAL_GRPC_GRAPHITE_PORT}:81"
         - "0.0.0.0:2005-2006:2003-2004"
         - "0.0.0.0:2023-2024:2023-2024"
         - "0.0.0.0:8125:8125/udp"

@@ -18,10 +18,10 @@ pip-install-edit-mode:
 	@pip install -e .
 
 launch-search-server:
-	@search_server
+	search_server
 
 launch-search-client:
-	@search_client --request_position_latlng 42 50 --m
+	search_client --request_position_latlng 42 50 --m
 
 re: fclean all
 

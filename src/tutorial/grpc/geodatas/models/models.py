@@ -2,6 +2,7 @@
 """
 TODO: refactorer pour séparer la définition des modèles et la gestion de l'ORM (sqlalchemy)
 """
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
@@ -13,7 +14,7 @@ engine = create_engine(
         PG_USER='docker',
         PG_PASSWD='docker',
         PG_HOST='localhost',
-        PG_PORT='5432',
+        PG_PORT=int(os.getenv("TUTORIAL_GRPC_DB_PORT", "5432")),
         PG_DB='test',
     ),
     echo=True
