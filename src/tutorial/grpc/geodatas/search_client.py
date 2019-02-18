@@ -33,7 +33,8 @@ def find_search_service_with_consul(consul_resolver_port, consul_resolver_namese
         raise RuntimeError(f"Can't find consul service={consul_service_name} => "
                            f"`Search-service` server not started/synced/checked !")
     ip = str(dnsanswer[0])
-    dnsanswer_srv = consul_resolver.query("search-service.service.consul", 'SRV')
+    dnsanswer_srv = consul_resolver.query(
+        "search-service.service.consul", 'SRV')
     port = int(str(dnsanswer_srv[0]).split()[2])
 
     return ip, port
@@ -46,7 +47,8 @@ def get_search_rpc_stub(ip, port):
     :param port:
     :return:
     """
-    logger.info(f"creating grpc client based on consul data: ip={ip} port={port}")
+    logger.info(
+        f"creating grpc client based on consul data: ip={ip} port={port}")
     channel = grpc.insecure_channel(f'{ip}:{port}')
     stub = search_pb2_grpc.SearchStub(channel)
     return stub
@@ -61,13 +63,15 @@ def process(args):
     Returns:
 
     """
-    ip, port = find_search_service_with_consul(args.consul_resolver_port, args.consul_resolver_nameservers)
+    ip, port = find_search_service_with_consul(
+        args.consul_resolver_port, args.consul_resolver_nameservers)
 
     stub = get_search_rpc_stub(ip, port)
 
     logger.debug("args.monitor: {}".format(args.monitor))
     if args.monitor:
-        monitresp = stub.monitor(search_pb2.google_dot_protobuf_dot_empty__pb2.Empty())
+        monitresp = stub.monitor(
+            search_pb2.google_dot_protobuf_dot_empty__pb2.Empty())
         logger.debug("monitor response: {}".format(monitresp))
 
     if args.request_position_latlng:
@@ -78,6 +82,7 @@ def process(args):
             result_per_page=10)
         logger.debug("sending request: {}".format(req))
         resp = stub.search(req)
+        resp = resp if not resp else None
         logger.debug("received response: {}".format(resp))
 
 
@@ -139,7 +144,8 @@ def main():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+    logging.basicConfig(
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
     logger.setLevel(logging.DEBUG)
 
     main()
