@@ -1,6 +1,6 @@
 RM = rm -rf
 
-TUTORIAL_GRPC_DB_PORT ?= 5432
+TUTORIAL_GRPC_PG_PORT ?= 5432
 TUTORIAL_GRPC_GRAPHITE_PORT ?= 81
 
 # all: docker-build
@@ -27,7 +27,9 @@ launch-search-client:
 	@python src/tutorial/grpc/geodatas/search_client.py --request_position_latlng 42 50 --m
 
 up:
-	@TUTORIAL_GRPC_DB_PORT=$(TUTORIAL_GRPC_DB_PORT) TUTORIAL_GRPC_GRAPHITE_PORT=$(TUTORIAL_GRPC_GRAPHITE_PORT) docker-compose up
+	@TUTORIAL_GRPC_PG_PORT=$(TUTORIAL_GRPC_PG_PORT) \
+	TUTORIAL_GRPC_GRAPHITE_PORT=$(TUTORIAL_GRPC_GRAPHITE_PORT) \
+	docker-compose up
 
 re: fclean all
 

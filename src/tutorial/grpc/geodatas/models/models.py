@@ -11,11 +11,11 @@ from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(
     "postgresql://{PG_USER}:{PG_PASSWD}@{PG_HOST}:{PG_PORT}/{PG_DB}".format(
-        PG_USER='docker',
-        PG_PASSWD='docker',
-        PG_HOST='localhost',
-        PG_PORT=int(os.getenv("TUTORIAL_GRPC_DB_PORT", "5432")),
-        PG_DB='test',
+        PG_USER=os.environ.get("TUTORIAL_GRPC_PG_USER", 'docker'),
+        PG_PASSWD=os.environ.get("TUTORIAL_GRPC_PG_PASSWD", 'docker'),
+        PG_HOST=os.environ.get("TUTORIAL_GRPC_PG_HOST", 'localhost'),
+        PG_PORT=int(os.getenv("TUTORIAL_GRPC_PG_PORT", "5432")),
+        PG_DB=os.environ.get("TUTORIAL_GRPC_PG_DB", 'test'),
     ),
     echo=True
 )
