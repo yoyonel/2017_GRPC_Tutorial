@@ -1,5 +1,4 @@
 """
-
 """
 import argparse
 import grpc
@@ -32,12 +31,11 @@ def find_search_service_with_consul(consul_resolver_port, consul_resolver_namese
     except dns.resolver.NoNameservers:
         raise RuntimeError(f"Can't find consul service={consul_service_name} => "
                            f"`Search-service` server not started/synced/checked !")
-    ip = str(dnsanswer[0])
-    dnsanswer_srv = consul_resolver.query(
-        "search-service.service.consul", 'SRV')
-    port = int(str(dnsanswer_srv[0]).split()[2])
+    service_ip = str(dnsanswer[0])
+    dnsanswer_srv = consul_resolver.query("search-service.service.consul", 'SRV')
+    service_port = int(str(dnsanswer_srv[0]).split()[2])
 
-    return ip, port
+    return service_ip, service_port
 
 
 def get_search_rpc_stub(ip, port):
@@ -82,7 +80,7 @@ def process(args):
             result_per_page=10)
         logger.debug("sending request: {}".format(req))
         resp = stub.search(req)
-        resp = resp if not resp else None
+        resp = resp if resp else None
         logger.debug("received response: {}".format(resp))
 
 

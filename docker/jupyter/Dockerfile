@@ -34,28 +34,35 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 RUN chmod +x /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-WORKDIR /opt/notebooks
-RUN git clone -b feature/packaging_setup.py https://github.com/yoyonel/2017_GRPC_Tutorial.git
-
 RUN curl https://pyenv.run | bash
 
 ENV HOME  /root
 ENV PYENV_ROOT $HOME/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
-RUN pip install pipenv
+RUN git clone -b feature/packaging_setup.py \
+        https://github.com/yoyonel/2017_GRPC_Tutorial.git \
+        /opt/notebooks/2017_GRPC_Tutorial
 
 WORKDIR /opt/notebooks/2017_GRPC_Tutorial
 
-RUN PIPENV_YES=1 pipenv install
-RUN source $(pipenv --venv)/bin/activate
-RUN pipenv run pip install .
-RUN pipenv run pip install ipykernel && \
-    pipenv run python -m ipykernel install --user --name=2017_GRPC_Tutorial
-RUN rm -rf /opt/notebooks/2017_GRPC_Tutorial
+RUN pip install pipenv
 
-#RUN apt-get update && \
-#    apt-get install -y postgresql-client
+RUN PIPENV_YES=1 pipenv install
+
+RUN pipenv run pip install . && \
+    pipenv run pip install ipykernel && \
+    pipenv run python -m ipykernel install --user --name=2017_GRPC_Tutorial
+
+# https://stackoverflow.com/questions/33159518/collapse-cell-in-jupyter-notebook
+RUN pip install hide_code                       && \
+    jupyter nbextension install --py hide_code  && \
+    jupyter nbextension enable --py hide_code   && \
+    jupyter serverextension enable --py hide_code
+
+RUN pipenv run pip install geopandas matplotlib descartes
+
+RUN rm -rf /opt/notebooks/2017_GRPC_Tutorial
 
 EXPOSE 8888
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "--notebook-dir=/opt/notebooks"]

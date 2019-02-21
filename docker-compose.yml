@@ -4,7 +4,7 @@ services:
     # docker run --name postgis -e POSTGRES_PASSWORD=password -e POSTGRES_USER=user -p 5432:5432 -d mdillon/postgis
     db:
       # https://hub.docker.com/r/mdillon/postgis/
-#      image: mdillon/postgis:9.6-alpine
+      # image: mdillon/postgis:9.6-alpine
       build: ./docker/postgis/
 
       hostname: postgis
@@ -17,8 +17,8 @@ services:
         - "0.0.0.0:${TUTORIAL_GRPC_PG_PORT}:5432"
       # network_mode: "host"
       environment:
-        - POSTGRES_USER:'user'
-        - POSTGRES_PASSWORD:'password'
+        - POSTGRES_USER:'docker'
+        - POSTGRES_PASSWORD:'docker'
         - POSTGRES_DB:'test'
       restart: on-failure:5
 

@@ -25,12 +25,12 @@ def start_core_rpc_server(request):
 
 
 @pytest.fixture
-def core_rpc_stub(request):
+def core_rpc_stub(_request):
     """
     Create a new rpc stub and connect to the server
 
-    :param request:
-    :type request:
+    :param _request:
+    :type _request:
     :return:
     :rtype:
     """

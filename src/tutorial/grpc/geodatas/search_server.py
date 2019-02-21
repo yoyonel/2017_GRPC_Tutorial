@@ -19,7 +19,7 @@ port = random.randint(50000, 59000)
 SIGNALS = [signal.SIGINT, signal.SIGTERM]
 
 
-def _signal_handler(sig, stack):
+def _signal_handler(_sig, _stack):
     """ Empty signal handler used to override python default one """
     pass
 

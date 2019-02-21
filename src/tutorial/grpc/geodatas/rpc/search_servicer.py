@@ -16,11 +16,11 @@ class SearchServicer(search_pb2_grpc.SearchServicer):
     stat = statsd.StatsClient('localhost', 8125)
 
     @stat.timer("search")
-    def search(self, request, context):
+    def search(self, request, _context):
         """
 
         :param request:
-        :param context:
+        :param _context:
         :return:
         """
         self.stat.incr("search_count")
@@ -33,11 +33,11 @@ class SearchServicer(search_pb2_grpc.SearchServicer):
         return search_pb2.SearchResponses(responses=responses)
 
     @stat.timer("monitor")
-    def monitor(self, request, context):
+    def monitor(self, _request, _context):
         """
 
-        :param request:
-        :param context:
+        :param _request:
+        :param _context:
         :return:
         """
         self.stat.incr("monitor_count")
