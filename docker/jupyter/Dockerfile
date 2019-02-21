@@ -35,7 +35,7 @@ RUN chmod +x /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 WORKDIR /opt/notebooks
-RUN git clone https://github.com/yoyonel/2017_GRPC_Tutorial.git
+RUN git clone -b feature/packaging_setup.py https://github.com/yoyonel/2017_GRPC_Tutorial.git
 
 RUN curl https://pyenv.run | bash
 
@@ -46,8 +46,16 @@ ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 RUN pip install pipenv
 
 WORKDIR /opt/notebooks/2017_GRPC_Tutorial
+
 RUN PIPENV_YES=1 pipenv install
-RUN apt-get update && apt-get install -y postgresql-client
+RUN source $(pipenv --venv)/bin/activate
+RUN pipenv run pip install .
+RUN pipenv run pip install ipykernel && \
+    pipenv run python -m ipykernel install --user --name=2017_GRPC_Tutorial
+RUN rm -rf /opt/notebooks/2017_GRPC_Tutorial
+
+#RUN apt-get update && \
+#    apt-get install -y postgresql-client
 
 EXPOSE 8888
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "--notebook-dir=/opt/notebooks"]

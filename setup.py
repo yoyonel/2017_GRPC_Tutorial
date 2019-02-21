@@ -3,6 +3,7 @@ from distutils.command.build_py import build_py as _build_py
 from distutils.command.sdist import sdist as _sdist
 
 import setuptools
+from setuptools import find_packages
 from setuptools import setup
 from setuptools.command.develop import develop as _develop
 
@@ -67,7 +68,8 @@ setup(
     author=['Lionel ATTY'],
     author_email=['yoyonel@hotmail.com'],
     url='',
-    packages=['tutorial.grpc.geodatas'],
+    # packages=['tutorial.grpc.geodatas'],
+    packages=['tutorial.{}'.format(x) for x in find_packages('src/tutorial')],
     package_dir={'': 'src'},
     package_data={'': ['*.proto']},
     classifiers=[
