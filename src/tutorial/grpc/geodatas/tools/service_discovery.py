@@ -12,8 +12,9 @@ def register_to_consul(port):
     TODO: need to handle exceptions
     """
     logger.info("register started")
-    c = consul.Consul()
     consul_host = os.environ.get("TUTORIAL_GRPC_CONSUL_HOST", "127.0.0.1")
+    logging.debug(f"consul_host={consul_host}")
+    c = consul.Consul(host=consul_host)
     check = consul.Check.tcp(consul_host, port, "30s")
     c.agent.service.register(
         "search-service",
