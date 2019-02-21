@@ -2,6 +2,7 @@
 """
 import consul
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -12,11 +13,12 @@ def register_to_consul(port):
     """
     logger.info("register started")
     c = consul.Consul()
-    check = consul.Check.tcp("127.0.0.1", port, "30s")
+    consul_host = os.environ.get("TUTORIAL_GRPC_CONSUL_HOST", "127.0.0.1")
+    check = consul.Check.tcp(consul_host, port, "30s")
     c.agent.service.register(
         "search-service",
         f"search-service-{port}",
-        address="127.0.0.1",
+        address=consul_host,
         port=port,
         check=check
     )

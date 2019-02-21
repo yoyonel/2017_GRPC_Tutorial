@@ -41,6 +41,15 @@ services:
     # docker run --net=host consul agent -server -ui -bootstrap -bind=127.0.0.1
     consul:
       image: consul
-      network_mode: "host"
+      # network_mode: "host"
       # https://docs.docker.com/compose/compose-file/compose-file-v2/#command
       command: ["agent", "-server", "-ui", "-bootstrap", "-bind=127.0.0.1"]
+
+    jupyter:
+      # image: continuumio/anaconda/jupyternotebook
+      build: ./docker/jupyter/
+      ports:
+        - "0.0.0.0:8888:8888"
+      links:
+        - db
+        - consul
