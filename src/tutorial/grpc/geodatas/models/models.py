@@ -5,7 +5,7 @@ TODO: refactorer pour séparer la définition des modèles et la gestion de l'OR
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Table
 from geoalchemy2 import Geometry
 from sqlalchemy.orm import sessionmaker
 
@@ -27,6 +27,10 @@ class Thing(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     geom = Column(Geometry('POLYGON'))
+
+
+class OGRGeoJSON(Base):
+    __table__ = Table('ogrgeojson', Base.metadata, autoload=True, autoload_with=engine)
 
 
 Session = sessionmaker(bind=engine)
