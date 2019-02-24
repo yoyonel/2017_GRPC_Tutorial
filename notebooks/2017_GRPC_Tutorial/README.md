@@ -1,3 +1,14 @@
+# gRPC
+## gRPC Concepts
+https://grpc.io/docs/guides/concepts.html
+## gRPC Basics - Python
+https://grpc.io/docs/tutorials/basic/python.html
+## gRPC Python
+https://grpc.io/grpc/python/index.html
+
+## Présentation - gRPC
+https://fr.slideshare.net/aymericlagier/grpc-85976118
+
 # Données
 
 ## Découpage administratif communal français issu d'OpenStreetMap
