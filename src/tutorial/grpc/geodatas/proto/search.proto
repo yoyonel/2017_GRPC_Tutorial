@@ -25,5 +25,6 @@ message MonitorResponse {
 service Search {
     rpc monitor(google.protobuf.Empty) returns (MonitorResponse) {}
     rpc search(SearchRequest) returns (SearchResponses) {}
+    rpc search_thing(SearchRequest) returns (SearchResponses) {}
     // TODO: define streamed versions
 }

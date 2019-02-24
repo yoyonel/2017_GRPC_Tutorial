@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n)tutorial/grpc/geodatas/proto/search.proto\x1a\x1bgoogle/protobuf/empty.proto\"f\n\rSearchRequest\x12\r\n\x05query\x18\x01 \x01(\t\x12\x0b\n\x03lat\x18\x04 \x01(\x02\x12\x0b\n\x03lng\x18\x05 \x01(\x02\x12\x13\n\x0bpage_number\x18\x02 \x01(\x05\x12\x17\n\x0fresult_per_page\x18\x03 \x01(\x05\"5\n\x0fSearchResponses\x12\"\n\tresponses\x18\x01 \x03(\x0b\x32\x0f.SearchResponse\"\"\n\x0eSearchResponse\x12\x10\n\x08response\x18\x01 \x01(\t\"#\n\x0fMonitorResponse\x12\x10\n\x08n_things\x18\x01 \x01(\x05\x32m\n\x06Search\x12\x35\n\x07monitor\x12\x16.google.protobuf.Empty\x1a\x10.MonitorResponse\"\x00\x12,\n\x06search\x12\x0e.SearchRequest\x1a\x10.SearchResponses\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n)tutorial/grpc/geodatas/proto/search.proto\x1a\x1bgoogle/protobuf/empty.proto\"f\n\rSearchRequest\x12\r\n\x05query\x18\x01 \x01(\t\x12\x0b\n\x03lat\x18\x04 \x01(\x02\x12\x0b\n\x03lng\x18\x05 \x01(\x02\x12\x13\n\x0bpage_number\x18\x02 \x01(\x05\x12\x17\n\x0fresult_per_page\x18\x03 \x01(\x05\"5\n\x0fSearchResponses\x12\"\n\tresponses\x18\x01 \x03(\x0b\x32\x0f.SearchResponse\"\"\n\x0eSearchResponse\x12\x10\n\x08response\x18\x01 \x01(\t\"#\n\x0fMonitorResponse\x12\x10\n\x08n_things\x18\x01 \x01(\x05\x32\xa1\x01\n\x06Search\x12\x35\n\x07monitor\x12\x16.google.protobuf.Empty\x1a\x10.MonitorResponse\"\x00\x12,\n\x06search\x12\x0e.SearchRequest\x1a\x10.SearchResponses\"\x00\x12\x32\n\x0csearch_thing\x12\x0e.SearchRequest\x1a\x10.SearchResponses\"\x00\x62\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
 
@@ -221,8 +221,8 @@ _SEARCH = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=306,
-  serialized_end=415,
+  serialized_start=307,
+  serialized_end=468,
   methods=[
   _descriptor.MethodDescriptor(
     name='monitor',
@@ -237,6 +237,15 @@ _SEARCH = _descriptor.ServiceDescriptor(
     name='search',
     full_name='Search.search',
     index=1,
+    containing_service=None,
+    input_type=_SEARCHREQUEST,
+    output_type=_SEARCHRESPONSES,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='search_thing',
+    full_name='Search.search_thing',
+    index=2,
     containing_service=None,
     input_type=_SEARCHREQUEST,
     output_type=_SEARCHRESPONSES,

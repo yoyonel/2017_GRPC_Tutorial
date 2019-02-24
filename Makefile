@@ -6,7 +6,7 @@ TUTORIAL_GRPC_GRAPHITE_PORT ?= 81
 # all: docker-build
 
 protos:
-	@ python setup.py build_proto_modules
+	@python setup.py build_proto_modules
 
 wheel:
 	@echo "Building python project..."
@@ -58,3 +58,4 @@ fclean:
 	@find . -name "*.pyc" -exec git rm --cached {} \;
 	# @$(RM) ./src/crawlertv/__pycache__
 	# @$(RM) ./src/crawlertv/protos/__pycache__
+	@find . -type d -name "__pycache__" -exec rm -Rf {} \;

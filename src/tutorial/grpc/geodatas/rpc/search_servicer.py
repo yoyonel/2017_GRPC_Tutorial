@@ -2,29 +2,23 @@
 """
 import logging
 from sqlalchemy import func
+from sqlalchemy.orm.query import Query
 import statsd
+from typing import Callable, List
 
 from tutorial.grpc.geodatas.common.base import session_factory
 from tutorial.grpc.geodatas.models.ogrgeojson import OGRGeoJSON
 from tutorial.grpc.geodatas.models.thing import Thing
 from tutorial.grpc.geodatas.proto import search_pb2, search_pb2_grpc
+from tutorial.grpc.geodatas.tools.geometry import Position
 
 logger = logging.getLogger(__name__)
 
 
-def generate_pg_point(lat: int, lng: int, srid: int = 4326) -> str:
-    """
-    https://gis.stackexchange.com/questions/189987/casting-between-postgis-types-in-geoalchemy
-
-    :param lat:
-    :param lng:
-    :param srid:
-    :return:
-    """
-    return f"SRID={srid};POINT({lat} {lng})"
-
-
-def _query_to_responses(query, func_response):
+def _query_to_responses(
+        query: Query,
+        func_response: Callable[[Query], str]
+) -> List[search_pb2.SearchResponse]:
     """
 
     :param query:
@@ -35,21 +29,22 @@ def _query_to_responses(query, func_response):
             for rec in query]
 
 
-def _search_thing(lat, lng):
+def _search_thing(lat: float, lng: float, srid: int = -1) -> List[search_pb2.SearchResponse]:
     """
 
     :param lat:
     :param lng:
+    :param srid:
     :return:
     """
     session = session_factory()
     query = session.query(Thing).filter(
         func.ST_Contains(Thing.geom,
-                         generate_pg_point(lat, lng)))
+                         Position(lat, lng, srid).to_wktelement))
     return _query_to_responses(query, lambda rec: rec.name)
 
 
-def _search_commune(lat, lng, srid=4326):
+def _search_commune(lat: float, lng: float, srid: int = 4326) -> List[search_pb2.SearchResponse]:
     """
 
     :param lat:
@@ -60,7 +55,7 @@ def _search_commune(lat, lng, srid=4326):
     session = session_factory()
     query = session.query(OGRGeoJSON).filter(
         func.ST_Contains(OGRGeoJSON.wkb_geometry,
-                         generate_pg_point(lat, lng, srid)))
+                         Position(lat, lng, srid).to_wkbelement))
     return _query_to_responses(
         query,
         lambda rec: "{} - {} - {}".format(rec.insee, rec.nom, rec.wikipedia)
@@ -71,7 +66,7 @@ class SearchServicer(search_pb2_grpc.SearchServicer):
     stat = statsd.StatsClient('localhost', 8125)
 
     @stat.timer("search")
-    def search(self, request, _context):
+    def search(self, request: search_pb2.SearchRequest, _context) -> search_pb2.SearchResponses:
         """
 
         :param request:
@@ -79,10 +74,25 @@ class SearchServicer(search_pb2_grpc.SearchServicer):
         :return:
         """
         self.stat.incr("search_count")
-        logger.info("search request: " + str(request))
+        logger.info("search (commune) request: " + str(request))
 
-        # responses = _search_thing(request.lat, request.lng)
         responses = _search_commune(request.lat, request.lng)
+
+        logger.info("search responses: " + str(responses))
+        return search_pb2.SearchResponses(responses=responses)
+
+    @stat.timer("search_thing")
+    def search_thing(self, request: search_pb2.SearchRequest, _context) -> search_pb2.SearchResponses:
+        """
+
+        :param request:
+        :param _context:
+        :return:
+        """
+        self.stat.incr("search_count")
+        logger.info("search (thing) request: " + str(request))
+
+        responses = _search_thing(request.lat, request.lng)
 
         logger.info("search responses: " + str(responses))
         return search_pb2.SearchResponses(responses=responses)

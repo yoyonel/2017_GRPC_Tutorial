@@ -25,6 +25,11 @@ class SearchStub(object):
         request_serializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchRequest.SerializeToString,
         response_deserializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchResponses.FromString,
         )
+    self.search_thing = channel.unary_unary(
+        '/Search/search_thing',
+        request_serializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchRequest.SerializeToString,
+        response_deserializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchResponses.FromString,
+        )
 
 
 class SearchServicer(object):
@@ -45,6 +50,13 @@ class SearchServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def search_thing(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_SearchServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -55,6 +67,11 @@ def add_SearchServicer_to_server(servicer, server):
       ),
       'search': grpc.unary_unary_rpc_method_handler(
           servicer.search,
+          request_deserializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchRequest.FromString,
+          response_serializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchResponses.SerializeToString,
+      ),
+      'search_thing': grpc.unary_unary_rpc_method_handler(
+          servicer.search_thing,
           request_deserializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchRequest.FromString,
           response_serializer=tutorial_dot_grpc_dot_geodatas_dot_proto_dot_search__pb2.SearchResponses.SerializeToString,
       ),
