@@ -10,7 +10,10 @@ import signal
 
 from tutorial.grpc.geodatas.proto import search_pb2_grpc
 from tutorial.grpc.geodatas.rpc.search_servicer import SearchServicer
-from tutorial.grpc.geodatas.tools.service_discovery import register_to_consul, unregister_to_consul
+from tutorial.grpc.geodatas.tools.service_discovery import (
+    register_to_consul,
+    unregister_to_consul
+)
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +33,8 @@ def serve(block=True):
     :param block:
     :return:
     """
-    logger.info("Search service, version={}".format(pkg_resources.get_distribution('tutorial-grpc-geodatas').version))
+    logger.info("Search service, version={}".format(
+        pkg_resources.get_distribution('tutorial-grpc-geodatas').version))
 
     # Register signal handler, only if blocking
     if block:

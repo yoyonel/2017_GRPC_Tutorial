@@ -3,39 +3,11 @@
 import argparse
 import grpc
 import logging
-import dns
-from dns import resolver
 
 from tutorial.grpc.geodatas.proto import search_pb2_grpc, search_pb2
+from tutorial.grpc.geodatas.tools.service_discovery import find_service_with_consul
 
 logger = logging.getLogger(__name__)
-
-
-def find_search_service_with_consul(consul_resolver_port, consul_resolver_nameservers):
-    """
-
-    :param consul_resolver_port:
-    :param consul_resolver_nameservers:
-    :return:
-    """
-    consul_resolver = resolver.Resolver()
-    consul_resolver.port = consul_resolver_port
-    consul_resolver.nameservers = consul_resolver_nameservers
-
-    consul_service_name = "search-service.service.consul"
-    try:
-        dnsanswer = consul_resolver.query(consul_service_name, 'A', lifetime=5)
-    except dns.exception.Timeout:
-        raise RuntimeError(
-            f"[dns.exception.Timeout] Can't reach consul resolver at port={consul_resolver_port} !")
-    except dns.resolver.NoNameservers:
-        raise RuntimeError(f"Can't find consul service={consul_service_name} => "
-                           f"`Search-service` server not started/synced/checked !")
-    service_ip = str(dnsanswer[0])
-    dnsanswer_srv = consul_resolver.query("search-service.service.consul", 'SRV')
-    service_port = int(str(dnsanswer_srv[0]).split()[2])
-
-    return service_ip, service_port
 
 
 def get_search_rpc_stub(ip, port):
@@ -45,43 +17,73 @@ def get_search_rpc_stub(ip, port):
     :param port:
     :return:
     """
-    logger.info(
-        f"creating grpc client based on consul data: ip={ip} port={port}")
+    logger.info(f"creating grpc client based on consul data: ip={ip} port={port}")
     channel = grpc.insecure_channel(f'{ip}:{port}')
     stub = search_pb2_grpc.SearchStub(channel)
     return stub
 
 
+def get_search_rpc_stub_with_consul(
+        consul_resolver_port,
+        consul_resolver_nameservers,
+        consul_resolver_nameservice
+):
+    """
+
+    :param consul_resolver_port:
+    :param consul_resolver_nameservers:
+    :param consul_resolver_nameservice:
+    :return:
+    """
+    search_service_ip, search_service_port = find_service_with_consul(consul_resolver_port,
+                                                                      consul_resolver_nameservers,
+                                                                      consul_resolver_nameservice)
+
+    return get_search_rpc_stub(search_service_ip, search_service_port)
+
+
+def process_monitor(search_service_stub):
+    """
+
+    :param search_service_stub:
+    :return:
+    """
+    monitresp = search_service_stub.monitor(search_pb2.google_dot_protobuf_dot_empty__pb2.Empty())
+    logger.debug("monitor response: {}".format(monitresp))
+
+
+def process_request_position(search_service_stub, lat, lng):
+    """
+
+    :param search_service_stub:
+    :param lat:
+    :param lng:
+    :return:
+    """
+    req = search_pb2.SearchRequest(query="search_client",
+                                   lat=lat,
+                                   lng=lng,
+                                   result_per_page=10)
+    logger.debug("sending request: {}".format(req))
+    resp = search_service_stub.search(req)
+    logger.debug("received response: {}".format(resp if resp else 'None'))
+
+
 def process(args):
     """
 
-    Args:
-        args (namedtuple):
-
-    Returns:
-
+    :param args:
+    :return:
     """
-    ip, port = find_search_service_with_consul(
-        args.consul_resolver_port, args.consul_resolver_nameservers)
+    search_service_stub = get_search_rpc_stub_with_consul(args.consul_resolver_port,
+                                                          args.consul_resolver_nameservers,
+                                                          args.consul_resolver_nameservice)
 
-    stub = get_search_rpc_stub(ip, port)
-
-    logger.debug("args.monitor: {}".format(args.monitor))
     if args.monitor:
-        monitresp = stub.monitor(
-            search_pb2.google_dot_protobuf_dot_empty__pb2.Empty())
-        logger.debug("monitor response: {}".format(monitresp))
+        process_monitor(search_service_stub)
 
     if args.request_position_latlng:
-        req = search_pb2.SearchRequest(
-            query="search_client",
-            lat=args.request_position_latlng[0],
-            lng=args.request_position_latlng[1],
-            result_per_page=10)
-        logger.debug("sending request: {}".format(req))
-        resp = stub.search(req)
-        resp = resp if resp else None
-        logger.debug("received response: {}".format(resp))
+        process_request_position(search_service_stub, *args.request_position_latlng)
 
 
 def build_parser(parser=None, **argparse_options):
@@ -113,6 +115,11 @@ def build_parser(parser=None, **argparse_options):
                         nargs='+',
                         type=str,
                         default=["127.0.0.1"],
+                        help="(default=%(default)s).")
+    parser.add_argument("--consul_resolver.nameservice", dest="consul_resolver_nameservice",
+                        nargs=1,
+                        type=str,
+                        default="search-service.service.consul",
                         help="(default=%(default)s).")
     #
     parser.add_argument("-m", "--monitor",

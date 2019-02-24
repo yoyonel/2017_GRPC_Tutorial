@@ -4,21 +4,25 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
-
-[packages]
-grpcio = "*"
-grpcio-tools = "*"
+coverage = "*"
 ipython = "*"
 memory-profiler = "*"
-sqlalchemy = "*"
-geoalchemy2 = "*"
-psycopg2 = "*"
-python-consul = "*"
-statsd = "*"
+pylint = "*"
+pytest = "*"
+pytest-docker-compose = "*"
+
+[packages]
 dnspython = "*"
 futures = "*"
-pytest-docker-compose = "*"
+geoalchemy2 = "*"
+geopandas = "*"
+grpcio = "*"
+grpcio-tools = "*"
+sqlalchemy = "*"
+psycopg2 = "*"
+psycopg2-binary = "*"
+python-consul = "*"
+statsd = "*"
 
 [requires]
 python_version = "3.7"

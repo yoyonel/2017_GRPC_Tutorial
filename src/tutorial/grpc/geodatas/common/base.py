@@ -1,12 +1,8 @@
-# coding=utf-8
 """
-TODO: refactorer pour séparer la définition des modèles et la gestion de l'ORM (sqlalchemy)
 """
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Table
-from geoalchemy2 import Geometry
 from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(
@@ -19,21 +15,13 @@ engine = create_engine(
     ),
     echo=True
 )
+
+# use session_factory() to get a new Session
+_SessionFactory = sessionmaker(bind=engine)
+
 Base = declarative_base()
 
 
-class Thing(Base):
-    __tablename__ = "thing"
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    geom = Column(Geometry('POLYGON'))
-
-
-class OGRGeoJSON(Base):
-    __table__ = Table('ogrgeojson', Base.metadata, autoload=True, autoload_with=engine)
-
-
-Session = sessionmaker(bind=engine)
-session = Session()
-
-Base.metadata.create_all(engine)
+def session_factory():
+    Base.metadata.create_all(engine)
+    return _SessionFactory()

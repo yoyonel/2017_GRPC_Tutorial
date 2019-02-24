@@ -1,10 +1,10 @@
 """
 """
-from tutorial.grpc.geodatas.models.models import Thing, session
+from tutorial.grpc.geodatas.models.thing import Thing
 from tutorial.grpc.geodatas.proto import search_pb2
 
 
-def test_search_server(core_rpc_stub):
+def test_search_server(core_rpc_stub, session):
     test_thing = Thing(
         name="test_thing",
         geom='POLYGON((0 0,1 0,1 1,0 1,0 0))'

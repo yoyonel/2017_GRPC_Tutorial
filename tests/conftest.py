@@ -1,6 +1,7 @@
 import grpc
 import pytest
 
+from tutorial.grpc.geodatas.common.base import session_factory
 from tutorial.grpc.geodatas.proto import search_pb2_grpc
 from tutorial.grpc.geodatas.search_server import serve
 
@@ -25,19 +26,13 @@ def start_core_rpc_server(request):
 
 
 @pytest.fixture
-def core_rpc_stub(_request):
-    """
-    Create a new rpc stub and connect to the server
-
-    :param _request:
-    :type _request:
-    :return:
-    :rtype:
-    """
-
-    # FIXME: add a way to configure host and port
-
-    channel = grpc.insecure_channel(f'localhost:{pytest.insecure_port}')
+def core_rpc_stub():
+    """Create a new rpc stub and connect to the server"""
+    channel = grpc.insecure_channel(f'localhost:{pytest.__dict__.get("insecure_port")}')
     stub = search_pb2_grpc.SearchStub(channel)
-
     return stub
+
+
+@pytest.fixture
+def session():
+    return session_factory()
