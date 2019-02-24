@@ -33,6 +33,22 @@ def core_rpc_stub():
     return stub
 
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def session():
     return session_factory()
+
+
+@pytest.fixture(scope='function')
+def add_to_session(session):
+    elements_added = []
+
+    def _add_to_session(element):
+        session.add(element)
+        session.commit()
+        elements_added.append(element)
+
+    yield _add_to_session
+
+    for e in elements_added:
+        session.delete(e)
+    session.commit()
