@@ -37,7 +37,7 @@ up:
 		https://www.data.gouv.fr/fr/datasets/r/07b7c9a2-d1e2-4da6-9f20-01a7b72d4b12 \
 		-O /tmp/07b7c9a2-d1e2-4da6-9f20-01a7b72d4b12
 
-/tmp/communes-20190101.json:
+/tmp/communes-20190101.json: 07b7c9a2-d1e2-4da6-9f20-01a7b72d4b12
     # https://unix.stackexchange.com/questions/59276/how-to-extract-only-a-specific-folder-from-a-zipped-archive-to-a-given-directory
 	@unzip /tmp/07b7c9a2-d1e2-4da6-9f20-01a7b72d4b12 communes-20190101.json -d /tmp/.
 
@@ -46,9 +46,6 @@ ogrgeojson: /tmp/communes-20190101.json
 	    -f "PostgreSQL" \
 	    PG:"host=localhost dbname=test user=docker password=docker port=2345" \
 	    "/tmp/communes-20190101.json"
-
-say_hello:
-	@echo "Hello World"
 
 re: fclean all
 
