@@ -13242,14 +13242,83 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Micro-Services:-Projects">Micro-Services: Projects<a class="anchor-link" href="#Micro-Services:-Projects">&#182;</a></h1>
+<h1 id="Pr&#233;sentation:-gRPC---MicroServices">Pr&#233;sentation: gRPC - MicroServices<a class="anchor-link" href="#Pr&#233;sentation:-gRPC---MicroServices">&#182;</a></h1><h2 id="Tutorial---Project:-App-(Client/Server)-Search-&quot;Thing&quot;/&quot;Communes-de-France&quot;">Tutorial - Project: App (Client/Server) Search "Thing"/"Communes de France"<a class="anchor-link" href="#Tutorial---Project:-App-(Client/Server)-Search-&quot;Thing&quot;/&quot;Communes-de-France&quot;">&#182;</a></h2><h3 id="https://github.com/yoyonel/2017_GRPC_Tutorial"><a href="https://github.com/yoyonel/2017_GRPC_Tutorial">https://github.com/yoyonel/2017_GRPC_Tutorial</a><a class="anchor-link" href="#https://github.com/yoyonel/2017_GRPC_Tutorial">&#182;</a></h3><center>
+    <img src="./datas/grpc_postgis_python.png">
+</center>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="gRPC---Remote-Procedure-Calls">gRPC - Remote Procedure Calls<a class="anchor-link" href="#gRPC---Remote-Procedure-Calls">&#182;</a></h2><ul>
+<li>Open Source (from Google) - Apache 2.0</li>
+<li>Framework RPC</li>
+<li>HTTP/2 <ul>
+<li>Focus on performancese</li>
+</ul>
+</li>
+<li>Interface Protocol Langage --&gt; Protocol Buffer aka Protobuf<ul>
+<li>Multi-langages: C++, Python, Go, ...</li>
+<li>Binary Serialization/Deserialization</li>
+</ul>
+</li>
+</ul>
+
 </div>
 </div>
 </div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="LI3DS-(Reseach---dev)">LI3DS (Reseach - dev)<a class="anchor-link" href="#LI3DS-(Reseach---dev)">&#182;</a></h2>
+<h3 id="&#160;RPC">&#160;RPC<a class="anchor-link" href="#&#160;RPC">&#182;</a></h3><blockquote><p>RPC (remote procedure call) est un protocole réseau permettant de faire des appels de procédures sur un ordinateur distant à l'aide d'un serveur d'applications. 
+Ce protocole est utilisé dans le modèle client-serveur pour assurer la communication entre le client, le serveur et d’éventuels intermédiaires.</p>
+</blockquote>
+<center>
+<img src="./datas/RPC_overview.png" style="width: auto; height: 600p;">
+</center>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Protobuf">Protobuf<a class="anchor-link" href="#Protobuf">&#182;</a></h3><blockquote><p>Protocol Buffers est un format de sérialisation avec un langage de description d'interface développé par Google. L'implémentation d'origine publiée par Google pour C++, Java et Python est disponible sous une licence libre.</p>
+</blockquote>
+<h4 id="IDL">IDL<a class="anchor-link" href="#IDL">&#182;</a></h4><blockquote><p>Interface description language (IDL) est un langage voué à la définition de l'interface de composants logiciels, laquelle permet de faire communiquer des modules implémentés dans des langages différents, ou déployés à travers un réseau sur des systèmes hétérogènes (Windows, Linux, Mac OS X, VMS, etc.) dans la perspective d'architecture distribuée.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="gRPC---Communication-modes">gRPC - Communication modes<a class="anchor-link" href="#gRPC---Communication-modes">&#182;</a></h3><p><img src="./datas/landing-2.svg"></p>
+<ul>
+<li>Unary RPCs: 1-to-1  (*)</li>
+<li>Streaming:<ul>
+<li>Server side</li>
+<li>Client side</li>
+<li>Bi-directionnal</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Micro-Services:-Projects-(old/new)">Micro-Services: Projects (old/new)<a class="anchor-link" href="#Micro-Services:-Projects-(old/new)">&#182;</a></h1>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="LI3DS-(Reseach---dev">LI3DS (Reseach - dev<a class="anchor-link" href="#LI3DS-(Reseach---dev">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13261,11 +13330,34 @@ a.anchor-link {
 </center>
 </div>
 </div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="CrawlerTV---Pythie-(&quot;Industry&quot;)">CrawlerTV - Pythie ("Industry")<a class="anchor-link" href="#CrawlerTV---Pythie-(&quot;Industry&quot;)">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<center>
+<img src="./datas/MS-CRAWLERTV_PYTHIE.png" style="width: 1280px; height: auto;">
+</center>
+</div>
+</div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Stack-Python,-GIS">Stack Python, GIS<a class="anchor-link" href="#Stack-Python,-GIS">&#182;</a></h1>
+<h1 id="Tutorial:-Search-&quot;Thing&quot;/&quot;Communes-de-France&quot;">Tutorial: Search "Thing"/"Communes de France"<a class="anchor-link" href="#Tutorial:-Search-&quot;Thing&quot;/&quot;Communes-de-France&quot;">&#182;</a></h1>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Stack-Python,-GIS">Stack Python, GIS<a class="anchor-link" href="#Stack-Python,-GIS">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13281,7 +13373,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Stack-Infra-(W.I.P.)">Stack Infra (W.I.P.)<a class="anchor-link" href="#Stack-Infra-(W.I.P.)">&#182;</a></h1>
+<h2 id="Stack-Infra-(W.I.P.)">Stack Infra (W.I.P.)<a class="anchor-link" href="#Stack-Infra-(W.I.P.)">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13306,8 +13398,7 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Project structure</span>
-<span class="err">├──</span> <span class="n">MANIFEST</span><span class="o">.</span><span class="ow">in</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="err">├──</span> <span class="n">MANIFEST</span><span class="o">.</span><span class="ow">in</span>
 <span class="err">├──</span> <span class="n">Makefile</span>
 <span class="err">├──</span> <span class="n">Pipfile</span>
 <span class="err">├──</span> <span class="n">docker</span>
@@ -13386,43 +13477,6 @@ a.anchor-link {
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="gRPC---Remote-Procedure-Calls">gRPC - Remote Procedure Calls<a class="anchor-link" href="#gRPC---Remote-Procedure-Calls">&#182;</a></h2><ul>
-<li>Open Source (from Google) - Apache 2.0</li>
-<li>Framework RPC</li>
-<li>HTTP/2 <ul>
-<li>Focus on performances</li>
-</ul>
-</li>
-<li>Interface Protocol Langage --&gt; Protocol Buffer aka Protobuf<ul>
-<li>Multi-langages: C++, Python, Go, ...</li>
-<li>Binary Serialization/Deserialization</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="gRPC---Communication-modes">gRPC - Communication modes<a class="anchor-link" href="#gRPC---Communication-modes">&#182;</a></h2><p><img src="./datas/landing-2.svg"></p>
-<ul>
-<li>Unary RPCs: 1-to-1  (*)</li>
-<li>Streaming:<ul>
-<li>Server side</li>
-<li>Client side</li>
-<li>Bi-directionnal</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
 </div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13583,7 +13637,7 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">w</span><span class="c1"># %load ./Makefile</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># %load ./Makefile</span>
 <span class="n">protos</span><span class="p">:</span>
 	<span class="nd">@python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_proto_modules</span>
 </pre></div>
@@ -13664,8 +13718,8 @@ a.anchor-link {
 <span class="err">├──</span> <span class="n">proto</span>
 <span class="err">│</span>   <span class="err">├──</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
 <span class="err">│</span>   <span class="err">├──</span> <span class="n">search</span><span class="o">.</span><span class="n">proto</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">search_pb2</span><span class="o">.</span><span class="n">py</span>       <span class="p">((</span><span class="o">*</span><span class="p">))</span> <span class="o">-</span> <span class="n">gRPC</span><span class="p">:</span> <span class="n">Messages</span> <span class="n">definitions</span> <span class="p">(</span><span class="n">generated</span> <span class="kn">from</span> <span class="err">`</span><span class="n">search</span><span class="o">.</span><span class="n">proto</span><span class="err">`</span><span class="p">)</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="n">search_pb2_grpc</span><span class="o">.</span><span class="n">py</span>  <span class="p">((</span><span class="o">*</span><span class="p">))</span> <span class="o">-</span> <span class="n">gRPC</span><span class="p">:</span> <span class="n">Services</span> <span class="n">definitions</span> <span class="p">(</span><span class="n">generated</span> <span class="kn">from</span> <span class="err">`</span><span class="n">search</span><span class="o">.</span><span class="n">proto</span><span class="err">`</span><span class="p">)</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">search_pb2</span><span class="o">.</span><span class="n">py</span>       <span class="p">((</span><span class="o">*</span><span class="p">))</span> <span class="o">-</span> <span class="n">gRPC</span><span class="p">:</span> <span class="n">Messages</span> <span class="n">definitions</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">search_pb2_grpc</span><span class="o">.</span><span class="n">py</span>  <span class="p">((</span><span class="o">*</span><span class="p">))</span> <span class="o">-</span> <span class="n">gRPC</span><span class="p">:</span> <span class="n">Services</span> <span class="n">definitions</span>
 <span class="err">├──</span> <span class="n">rpc</span>
 <span class="err">│</span>   <span class="err">├──</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
 <span class="err">│</span>   <span class="err">└──</span> <span class="n">search_servicer</span><span class="o">.</span><span class="n">py</span>
@@ -13673,7 +13727,7 @@ a.anchor-link {
 <span class="err">├──</span> <span class="n">search_server</span><span class="o">.</span><span class="n">py</span>         <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">-</span> <span class="n">Application</span><span class="p">:</span> <span class="n">Search</span> <span class="n">Server</span>
 <span class="err">└──</span> <span class="n">tools</span>
     <span class="err">├──</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
-    <span class="err">├──</span> <span class="n">geometry</span><span class="o">.</span><span class="n">py</span>          <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">-</span> <span class="n">GeoAlchemy</span><span class="o">/</span><span class="n">Shapely</span><span class="p">:</span> <span class="n">helper</span> <span class="k">for</span> <span class="n">Position</span> <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">srid</span><span class="p">)</span> <span class="nb">object</span>
+    <span class="err">├──</span> <span class="n">geometry</span><span class="o">.</span><span class="n">py</span>          <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">-</span> <span class="n">GeoAlchemy</span><span class="o">/</span><span class="n">Shapely</span><span class="p">:</span> <span class="n">helper</span> <span class="k">for</span> <span class="n">Position</span>
     <span class="err">├──</span> <span class="n">rpc_stub</span><span class="o">.</span><span class="n">py</span>          <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">-</span> <span class="n">gRPC</span><span class="o">/</span><span class="n">Consul</span><span class="p">:</span> <span class="n">helpers</span> <span class="k">for</span> <span class="n">stub</span> <span class="n">generation</span>
     <span class="err">└──</span> <span class="n">service_discovery</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
@@ -13918,39 +13972,49 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="err">$</span> <span class="n">python</span> <span class="n">search_server</span><span class="o">.</span><span class="n">py</span>
-<span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="n">SQLAlchemy</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="mi">138</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Search</span> <span class="n">service</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="mi">145</span> <span class="o">-</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">geodatas</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">service_discovery</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">register</span> <span class="n">started</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="mi">145</span> <span class="o">-</span> <span class="n">root</span> <span class="o">-</span> <span class="n">DEBUG</span> <span class="o">-</span> <span class="n">consul_host</span><span class="o">=</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="mi">184</span> <span class="o">-</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">geodatas</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">service_discovery</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">services</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;search-service-50361&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-50361&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">50361</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="s1">&#39;search-service-53261&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-53261&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">53261</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="s1">&#39;search-service-54816&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-54816&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">54816</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="s1">&#39;search-service-55823&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-55823&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">55823</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="s1">&#39;search-service-56867&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-56867&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">56867</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}}</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="mi">185</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Starting</span> <span class="n">server</span> <span class="n">on</span> <span class="n">port</span> <span class="mf">53261.</span><span class="o">..</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="mi">188</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Ready</span> <span class="ow">and</span> <span class="n">waiting</span> <span class="k">for</span> <span class="n">connections</span><span class="o">.</span>
-        
-<span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="n">Receiving</span> <span class="n">a</span> <span class="n">search</span> <span class="n">request</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">client</span>
-
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">00</span><span class="p">,</span><span class="mi">992</span> <span class="o">-</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">geodatas</span><span class="o">.</span><span class="n">rpc</span><span class="o">.</span><span class="n">search_servicer</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">search</span> <span class="n">request</span><span class="p">:</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;search_client&quot;</span>
-<span class="n">result_per_page</span><span class="p">:</span> <span class="mi">10</span>
-<span class="n">lat</span><span class="p">:</span> <span class="mf">4.849999904632568</span>
-<span class="n">lng</span><span class="p">:</span> <span class="mf">45.75</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">01</span><span class="p">,</span><span class="mi">008</span> <span class="o">-</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">geodatas</span><span class="o">.</span><span class="n">rpc</span><span class="o">.</span><span class="n">search_servicer</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">search</span> <span class="n">responses</span><span class="p">:</span> <span class="p">[</span><span class="n">response</span><span class="p">:</span> <span class="s2">&quot;69123 - Lyon - fr:Lyon&quot;</span><span class="p">]</span>
-            
-<span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="n">Shutdown</span> <span class="p">(</span><span class="n">search</span><span class="p">)</span> <span class="n">server</span>
-
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span><span class="mi">481</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">Signal</span> <span class="mi">2</span> <span class="n">received</span><span class="p">,</span> <span class="n">shutting</span> <span class="n">down</span><span class="o">...</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span><span class="mi">482</span> <span class="o">-</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">geodatas</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">service_discovery</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">unregister</span> <span class="n">started</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span><span class="mi">510</span> <span class="o">-</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">grpc</span><span class="o">.</span><span class="n">geodatas</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">service_discovery</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">services</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;search-service-50361&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-50361&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">50361</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="s1">&#39;search-service-54816&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-54816&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">54816</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="s1">&#39;search-service-55823&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-55823&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">55823</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="s1">&#39;search-service-56867&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service-56867&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;search-service&#39;</span><span class="p">,</span> <span class="s1">&#39;Tags&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;Meta&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;Port&#39;</span><span class="p">:</span> <span class="mi">56867</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;Weights&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Passing&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Warning&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;EnableTagOverride&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}}</span>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span>$ python search_server.py
+<span class="o">[</span>...<span class="o">]</span> SQLAlchemy
+<span class="m">2019</span>-02-24 <span class="m">16</span>:30:32,138 - __main__ - INFO - Search service, <span class="nv">version</span><span class="o">=</span><span class="m">0</span>.1.0
+<span class="m">2019</span>-02-24 <span class="m">16</span>:30:32,145 - tutorial.grpc.geodatas.tools.service_discovery - INFO - register started
+<span class="m">2019</span>-02-24 <span class="m">16</span>:30:32,145 - root - DEBUG - <span class="nv">consul_host</span><span class="o">=</span><span class="m">127</span>.0.0.1
+<span class="m">2019</span>-02-24 <span class="m">16</span>:30:32,184 - tutorial.grpc.geodatas.tools.service_discovery - INFO - services: <span class="o">{</span><span class="s1">&#39;search-service-50361&#39;</span>: <span class="o">{</span>...<span class="o">}}</span>
+<span class="m">2019</span>-02-24 <span class="m">16</span>:30:32,185 - __main__ - INFO - Starting server on port <span class="m">53261</span>...
+<span class="m">2019</span>-02-24 <span class="m">16</span>:30:32,188 - __main__ - INFO - Ready and waiting <span class="k">for</span> connections.
 </pre></div>
 
-    </div>
 </div>
 </div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span> Receiving a search request from a client
 
+<span class="m">2019</span>-02-24 <span class="m">16</span>:31:00,992 - tutorial.grpc.geodatas.rpc.search_servicer - INFO - search request: query: <span class="s2">&quot;search_client&quot;</span>
+result_per_page: <span class="m">10</span>
+lat: <span class="m">4</span>.849999904632568
+lng: <span class="m">45</span>.75
+<span class="m">2019</span>-02-24 <span class="m">16</span>:31:01,008 - tutorial.grpc.geodatas.rpc.search_servicer - INFO - search responses: <span class="o">[</span>response: <span class="s2">&quot;69123 - Lyon - fr:Lyon&quot;</span><span class="o">]</span>
+</pre></div>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="o">[</span>...<span class="o">]</span> Shutdown <span class="o">(</span>search<span class="o">)</span> server
+
+<span class="m">2019</span>-02-24 <span class="m">16</span>:31:31,481 - __main__ - INFO - Signal <span class="m">2</span> received, shutting down...
+<span class="m">2019</span>-02-24 <span class="m">16</span>:31:31,482 - tutorial.grpc.geodatas.tools.service_discovery - INFO - unregister started
+<span class="m">2019</span>-02-24 <span class="m">16</span>:31:31,510 - tutorial.grpc.geodatas.tools.service_discovery - INFO - services: <span class="o">{</span><span class="s1">&#39;search-service-50361&#39;</span>: <span class="o">{</span>...<span class="o">}}</span>
+</pre></div>
+
+</div>
+</div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -14128,7 +14192,7 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># %load ./src/tutorial/grpc/geodatas/search_client.py</span>
@@ -14155,33 +14219,6 @@ a.anchor-link {
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-33-36b0c719bd70&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> 
-<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-green-fg">from</span> tutorial<span class="ansi-blue-fg">.</span>grpc<span class="ansi-blue-fg">.</span>geodatas<span class="ansi-blue-fg">.</span>proto <span class="ansi-green-fg">import</span> search_pb2_grpc<span class="ansi-blue-fg">,</span> search_pb2
-<span class="ansi-green-fg">----&gt; 8</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> tutorial<span class="ansi-blue-fg">.</span>grpc<span class="ansi-blue-fg">.</span>geodatas<span class="ansi-blue-fg">.</span>tools<span class="ansi-blue-fg">.</span>rpc_stub <span class="ansi-green-fg">import</span> get_search_rpc_stub_with_consul
-<span class="ansi-green-intense-fg ansi-bold">      9</span> 
-<span class="ansi-green-intense-fg ansi-bold">     10</span> logger <span class="ansi-blue-fg">=</span> logging<span class="ansi-blue-fg">.</span>getLogger<span class="ansi-blue-fg">(</span>__name__<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;tutorial.grpc.geodatas.tools.rpc_stub&#39;</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -14300,7 +14337,14 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="fragment">
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Processing---Request-position">Processing - Request position<a class="anchor-link" href="#Processing---Request-position">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
@@ -14321,7 +14365,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -14329,28 +14373,36 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="err">$</span> <span class="n">python</span> <span class="n">search_client</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">request_position_latlng</span> <span class="mf">4.850000</span> <span class="mf">45.750000</span> <span class="o">--</span><span class="n">m</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">10</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span><span class="mi">599</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">creating</span> <span class="n">grpc</span> <span class="n">client</span> <span class="n">based</span> <span class="n">on</span> <span class="n">consul</span> <span class="n">data</span><span class="p">:</span> <span class="n">ip</span><span class="o">=</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="n">port</span><span class="o">=</span><span class="mi">54813</span>
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">10</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span><span class="mi">612</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">DEBUG</span> <span class="o">-</span> <span class="n">monitor</span> <span class="n">response</span><span class="p">:</span> <span class="n">n_things</span><span class="p">:</span> <span class="mi">4</span>
-
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">10</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span><span class="mi">612</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">DEBUG</span> <span class="o">-</span> <span class="n">sending</span> <span class="n">request</span><span class="p">:</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;search_client&quot;</span>
-<span class="n">result_per_page</span><span class="p">:</span> <span class="mi">10</span>
-<span class="n">lat</span><span class="p">:</span> <span class="mf">4.849999904632568</span>
-<span class="n">lng</span><span class="p">:</span> <span class="mf">45.75</span>
-
-<span class="mi">2019</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">24</span> <span class="mi">10</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span><span class="mi">630</span> <span class="o">-</span> <span class="n">__main__</span> <span class="o">-</span> <span class="n">DEBUG</span> <span class="o">-</span> <span class="n">received</span> <span class="n">response</span><span class="p">:</span> <span class="n">responses</span> <span class="p">{</span><span class="n">response</span><span class="p">:</span> <span class="s2">&quot;69123 - Lyon - fr:Lyon&quot;</span><span class="p">}</span>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span>$ python search_client.py --request_position_latlng <span class="m">4</span>.850000 <span class="m">45</span>.750000 --m
+<span class="m">2019</span>-02-24 <span class="m">10</span>:06:35,599 - __main__ - INFO - creating grpc client based on consul data: <span class="nv">ip</span><span class="o">=</span><span class="m">127</span>.0.0.1 <span class="nv">port</span><span class="o">=</span><span class="m">54813</span>
+<span class="m">2019</span>-02-24 <span class="m">10</span>:06:35,612 - __main__ - DEBUG - monitor response: n_things: <span class="m">4</span>
+<span class="m">2019</span>-02-24 <span class="m">10</span>:06:35,612 - __main__ - DEBUG - sending request: query: <span class="s2">&quot;search_client&quot;</span>
+result_per_page: <span class="m">10</span>
+lat: <span class="m">4</span>.849999904632568
+lng: <span class="m">45</span>.75
+<span class="m">2019</span>-02-24 <span class="m">10</span>:06:35,630 - __main__ - DEBUG - received response: responses <span class="o">{</span>response: <span class="s2">&quot;69123 - Lyon - fr:Lyon&quot;</span><span class="o">}</span>
 </pre></div>
 
-    </div>
 </div>
 </div>
-
-</div></section></section>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Bilans-(W.I.P.)">Bilans (W.I.P.)<a class="anchor-link" href="#Bilans-(W.I.P.)">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="des-Questions-?">des Questions ?<a class="anchor-link" href="#des-Questions-?">&#182;</a></h1><h1 id="Merci-:-)">Merci :-)<a class="anchor-link" href="#Merci-:-)">&#182;</a></h1>
+</div>
+</div>
+</div></div></section></section>
 </div>
 </div>
 
