@@ -41,7 +41,7 @@ up:
     # https://unix.stackexchange.com/questions/59276/how-to-extract-only-a-specific-folder-from-a-zipped-archive-to-a-given-directory
 	@unzip /tmp/07b7c9a2-d1e2-4da6-9f20-01a7b72d4b12 communes-20190101.json -d /tmp/.
 
-ogrgeojson: /tmp/communes-20190101.json
+communes-20190101: /tmp/communes-20190101.json
 	@ogr2ogr \
 	    -f "PostgreSQL" \
 	    PG:"host=localhost dbname=test user=docker password=docker port=2345" \
