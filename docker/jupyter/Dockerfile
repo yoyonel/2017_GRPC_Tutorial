@@ -40,7 +40,7 @@ ENV HOME  /root
 ENV PYENV_ROOT $HOME/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
-RUN git clone -b 0.1.2 \
+RUN git clone -b '0.1.2' --single-branch --depth 1 \
         https://github.com/yoyonel/2017_GRPC_Tutorial.git \
         /opt/notebooks/2017_GRPC_Tutorial
 
