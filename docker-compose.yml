@@ -65,7 +65,7 @@ services:
       # image: continuumio/anaconda/jupyternotebook
       build: ./docker/jupyter/
       ports:
-        - "0.0.0.0:8888:8888"
+        - "127.0.0.1:8888:8888"
       volumes:
         - ".:/opt/notebooks/2017_GRPC_Tutorial"
       network_mode: "host"

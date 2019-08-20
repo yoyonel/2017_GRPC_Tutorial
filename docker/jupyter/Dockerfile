@@ -1,9 +1,11 @@
 # https://hub.docker.com/r/continuumio/anaconda/
-FROM continuumio/anaconda
+#FROM continuumio/anaconda
+FROM continuumio/anaconda3
 
 # make bash default shell
 USER root
-RUN ln -snf /bin/bash /bin/sh
+# RUN ln -snf /bin/bash /bin/sh
+SHELL ["/bin/bash", "--login", "-c"]
 
 RUN apt-get update && apt-get install -y \
         jq \
@@ -65,4 +67,4 @@ RUN pipenv run pip install geopandas matplotlib descartes
 RUN rm -rf /opt/notebooks/2017_GRPC_Tutorial
 
 EXPOSE 8888
-CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "--notebook-dir=/opt/notebooks"]
+CMD ["/opt/conda/bin/jupyter", "notebook", "--port=8888", "--no-browser", "--ip=127.0.0.1", "--allow-root", "--notebook-dir=/opt/notebooks"]
