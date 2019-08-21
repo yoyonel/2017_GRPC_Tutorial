@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/continuumio/anaconda/
-FROM continuumio/anaconda
+FROM continuumio/anaconda3:2019.03
 
 # make bash default shell
 USER root
